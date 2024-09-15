@@ -60,7 +60,7 @@ export function App() {
 		(key: keyof typeof nums) => (e: ChangeEvent<HTMLInputElement>) => {
 			setNums((prevNums) => ({
 				...prevNums,
-				[key]: e.target.value,
+				[key]: (e.target as any).value,
 			}));
 		};
 
