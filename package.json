@@ -1,0 +1,17 @@
+{
+	"name": "braid",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm --filter website dev",
+		"style": "prettier --write .",
+		"test:all": "pnpm -r test"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"prettier": "^3.3.3"
+	}
+}
