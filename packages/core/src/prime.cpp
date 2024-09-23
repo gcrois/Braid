@@ -2,8 +2,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-using namespace std;
-
 #ifdef __cplusplus
 #define EXTERN extern "C"
 #else

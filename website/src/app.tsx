@@ -5,7 +5,7 @@ import { Button } from "@braid/ui";
 import { add } from "@braid/utils";
 import { initCore } from "@braid/core";
 
-const init = initCore({ assetUrl: "/Braid/core.wasm" });
+const init = initCore();
 let core: Awaited<typeof init>;
 
 export function App() {
