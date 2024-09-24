@@ -37,9 +37,9 @@ jobs:
               run: pnpm run build
 
             - name: Upload production-ready build files
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
-                  name: production-files
+                  name: github-pages
                   path: ./website/dist
     deploy:
         needs: build
