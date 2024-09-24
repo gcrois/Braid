@@ -1,4 +1,5 @@
 import { describe, expect, test, beforeAll, bench } from "vitest";
+import { generatePrime, generatePrimeSieve } from "./prime";
 import { initCore } from ".";
 
 const init = initCore();
@@ -9,16 +10,27 @@ beforeAll(async () => {
     core = await init;
 });
 
+const inputSizes = Array.from({ length: 4 }, (_, i) => Math.pow(10, i + 1));
 describe("Prime Generation Benchmark", () => {
-	const inputSizes = [10, 50, 100, 1000];
-
 	inputSizes.forEach((n) => {
-		bench(`generatePrime for n = ${n}`, () => {
-			core._generatePrime(n);
+		bench(`generatePrimeSieve for n = ${n}`, () => {
+			generatePrimeSieve(n);
 		});
 
-		bench(`generatePrimeSieve for n = ${n}`, () => {
+		bench(`generatePrimeSieveWasm for n = ${n}`, () => {
 			core._generatePrimeSieve(n);
 		});
 	});
 });
+
+// describe("Prime Generation Wasm", () => {
+// 	inputSizes.forEach((n) => {
+// 		bench(`generatePrimeWasm for n = ${n}`, () => {
+// 			core._generatePrime(n);
+// 		});
+
+// 		bench(`generatePrimeSieveWasm for n = ${n}`, () => {
+// 			core._generatePrimeSieve(n);
+// 		});
+// 	})
+// });
