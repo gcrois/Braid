@@ -1,7 +1,10 @@
 import { useState } from "preact/hooks";
 import { ChangeEvent } from "preact/compat";
 
-import { Button } from "@braid/ui";
+import {
+	Button,
+	SpatialHashVisualizer
+} from "@braid/ui";
 import { add } from "@braid/utils";
 import { initCore } from "@braid/core";
 
@@ -52,6 +55,7 @@ export function App() {
 					Generate Prime
 				</Button>
 			</div>
+			<SpatialHashVisualizer />
 		</div>
 	);
 }

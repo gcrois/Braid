@@ -20,16 +20,16 @@ public:
 
     void insertBox(const Box& box);
     void updateBox(const Box& box);
-    Box& getBox(uint32_t id);
-    void removeBox(uint32_t id);
+    Box& getBox(decltype(Box::id) id);
+    void removeBox(decltype(Box::id) id);
 
-    std::vector<uint32_t> queryBox(const Box& box);
-    std::vector<uint32_t> getAllItems();
+    std::vector<decltype(Box::id)> queryBox(const Box& box);
+    std::vector<decltype(Box::id)> getAllItems();
 
 private:
     float cellSize;
-    std::unordered_map<uint32_t, Box> boxes;
-    std::unordered_map<std::pair<int, int>, std::vector<uint32_t>, pair_hash> grid;
+    std::unordered_map<decltype(Box::id), Box> boxes;
+    std::unordered_map<std::pair<int, int>, std::vector<decltype(Box::id)>, pair_hash> grid;
 
     std::vector<std::pair<int, int>> getCellsCoveredByBox(const Box& box);
 };

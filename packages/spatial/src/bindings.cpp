@@ -6,11 +6,12 @@
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(module) {
-    register_vector<uint32_t>("vector<uint32_t>");
+    register_vector<decltype(Box::id)>("VectorId")
+        .constructor<const std::vector<decltype(Box::id)>&>();
 
     class_<Box>("Box")
         .constructor<>()
-        .constructor<uint32_t, float, float, float, float>()
+        .constructor<decltype(Box::id), float, float, float, float>()
         .property("id", &Box::id)
         .property("minX", &Box::minX)
         .property("minY", &Box::minY)

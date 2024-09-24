@@ -4,7 +4,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "vitest run",
-		"build:wasm": "emcc src/**.cpp -o build/spatial_hash.js -s MODULARIZE=1 -s EXPORT_NAME=\"createSpatialHashModule\" --bind --emit-tsd interface.d.ts -std=c++20 -O3 -s ALLOW_MEMORY_GROWTH=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\"]'",
+		"build:wasm": "emcc src/**.cpp -o build/spatial_hash.js -s MODULARIZE=1 -s EXPORT_NAME=\"createSpatialHashModule\" --bind --emit-tsd interface.d.ts -std=c++20 -O3 -lembind -s WASM=1 -s EXPORT_ES6=1 -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\"]'",
 		"build": "npm run build:wasm"
 	},
 	"devDependencies": {

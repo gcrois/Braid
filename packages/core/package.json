@@ -4,7 +4,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "vitest run",
-		"build:wasm": "emcc -lembind src/**.cpp -s WASM=1 -Oz --profiling-funcs --emit-tsd interface.d.ts -s EXPORT_ES6=1 -s MODULARIZE -s 'EXPORT_NAME=\"createCore\"' -o build/core.js",
+		"build:wasm": "emcc -lembind src/**.cpp -s WASM=1 --emit-tsd interface.d.ts -s EXPORT_ES6=1 -s MODULARIZE -s 'EXPORT_NAME=\"createCore\"' -o build/core.js",
 		"build": "npm run build:wasm"
 	},
 	"devDependencies": {
