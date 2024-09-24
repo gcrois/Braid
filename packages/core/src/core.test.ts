@@ -6,7 +6,7 @@ let core: Awaited<typeof init>;
 
 beforeAll(async () => {
 	await init;
-    core = await init;
+	core = await init;
 });
 
 test("multiply native", () => {

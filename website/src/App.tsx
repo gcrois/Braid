@@ -26,7 +26,7 @@ export function App() {
 
 	const handleNChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setN(e.target?.value);
-	}
+	};
 
 	return (
 		<div>
