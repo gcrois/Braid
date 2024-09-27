@@ -1,7 +1,6 @@
-// spatialHash.test.ts
+// spatial.test.ts
 import { test, expect, beforeAll } from "vitest";
 import { initSpatial } from "./index";
-import { vector } from "../build/interface";
 import { vector_to_array } from "./util";
 
 const init = initSpatial();
@@ -12,7 +11,7 @@ beforeAll(async () => {
 });
 
 test("Insert a box", () => {
-	const spatialHash = new Spatial.SpatialHash(10.0);
+	const spatialHash = new Spatial.RTreeIndex();
 
 	const box = new Spatial.Box(1, 0, 0, 5, 5);
 	spatialHash.insertBox(box);
@@ -21,7 +20,7 @@ test("Insert a box", () => {
 });
 
 test("Insert a box with a different id", () => {
-	const spatialHash = new Spatial.SpatialHash(10.0);
+	const spatialHash = new Spatial.RTreeIndex();
 
 	const box = new Spatial.Box(1, 0, 0, 5, 5);
 	spatialHash.insertBox(box);
@@ -29,7 +28,7 @@ test("Insert a box with a different id", () => {
 });
 
 test("SpatialHash operations", () => {
-	const spatialHash = new Spatial.SpatialHash(10.0);
+	const spatialHash = new Spatial.RTreeIndex();
 
 	const box1 = new Spatial.Box(1, 0, 0, 5, 5);
 	const box2 = new Spatial.Box(2, 5, 5, 15, 15);

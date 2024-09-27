@@ -28,7 +28,7 @@ declare namespace RuntimeExports {
 interface WasmModule {
 }
 
-export interface vector<uint32_t> {
+export interface VectorInt {
   push_back(_0: number): void;
   resize(_0: number, _1: number): void;
   size(): number;
@@ -46,19 +46,29 @@ export interface Box {
   delete(): void;
 }
 
-export interface SpatialHash {
-  queryBox(_0: Box): vector<uint32_t>;
-  getAllItems(): vector<uint32_t>;
+export interface ISpatialIndex {
+  queryBox(_0: Box): VectorInt;
+  getAllItems(): VectorInt;
   insertBox(_0: Box): void;
   updateBox(_0: Box): void;
-  getBox(_0: number): Box;
   removeBox(_0: number): void;
+  getBox(_0: number): Box;
+  delete(): void;
+}
+
+export interface RTree extends ISpatialIndex {
+  delete(): void;
+}
+
+export interface SpatialHash extends ISpatialIndex {
   delete(): void;
 }
 
 interface EmbindModule {
-  vector<uint32_t>: {new(): vector<uint32_t>};
+  VectorInt: {new(): VectorInt};
   Box: {new(): Box; new(_0: number, _1: number, _2: number, _3: number, _4: number): Box};
+  ISpatialIndex: {};
+  RTree: {new(_0: number): RTree};
   SpatialHash: {new(_0: number): SpatialHash};
 }
 

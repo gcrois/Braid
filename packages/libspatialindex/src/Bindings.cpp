@@ -2,9 +2,7 @@
 #include <emscripten/bind.h>
 #include "Box.hpp"
 #include "ISpatialIndex.hpp"
-
-#include "RTree.hpp"
-#include "SpatialHash.hpp"
+#include "RTreeIndex.hpp"
 
 using namespace emscripten;
 
@@ -28,10 +26,7 @@ EMSCRIPTEN_BINDINGS(module) {
         .function("queryBox", &ISpatialIndex::queryBox)
         .function("getAllItems", &ISpatialIndex::getAllItems);
 
-    class_<RTree, base<ISpatialIndex>>("RTree")
-        .constructor<int>();
-    
-    class_<SpatialHash, base<ISpatialIndex>>("SpatialHash")
-        .constructor<float>();
+    class_<RTreeIndex, base<ISpatialIndex>>("RTreeIndex")
+        .constructor<>();
 }
 
