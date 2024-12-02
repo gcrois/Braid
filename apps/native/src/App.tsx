@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import initCore from "@braid/c_example/js";
+import initCoreMjs from "@braid/c_example/build/js/core.mjs";
+import { initCore } from "@braid/c_example";
+
 
 export default function App() {
 	useEffect(() => {
-        console.log(initCore);
-		// initCore().then((core) => {
-		// 	console.log(core);
-		// 	core._main(0, 0);
-		// });
-		// console.log("Hello from the mobile app");
+        console.log(initCoreMjs);
+		initCoreMjs().then((core) => {
+			console.log(core);
+			core._main(0, 0);
+		});
+		console.log("Hello from the mobile app");
 	});
 	return (
 		<View style={styles.container}>

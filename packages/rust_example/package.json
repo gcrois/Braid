@@ -6,6 +6,10 @@
 		".": {
 			"import": "./src/index.ts"
 		},
+		"./node": {
+			"import": "./build/nodejs/rust_example.js",
+			"types": "./build/nodejs/rust_example.d.ts"
+		},
 		"./wasm": {
 			"import": "./build/wasm/rust_example.js",
 			"types": "./build/wasm/rust_example.d.ts"
@@ -17,20 +21,21 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest run",
-		"build:wasm": "wasm-pack build --target web",
-		"build:nodejs": "wasm-pack build --target nodejs",
-		"build:native": "cargo build --release",
-		"build": "npm run build:wasm && npm run build:nodejs && npm run build:native",
-		"run:native": "cargo run --release",
-		"run:nodejs": "node ./src/run.js"
+		"build:wasm": "wasm-pack build --target web --out-dir build/wasm --scope braid-wasm",
+		"build:node": "wasm-pack build --target nodejs --out-dir build/nodejs --scope braid-node",
+		"build:native": "cargo build --release -Z unstable-options --artifact-dir build/native",
+		"build": "npm run build:wasm && npm run build:node && npm run build:native",
+		"run:native": "build/native/rust_example",
+		"run:node": "tsx ./src/run.ts"
 	},
 	"devDependencies": {
-		"typescript": "^5.7.2",
 		"tsx": "^4.19.2",
+		"typescript": "^5.7.2",
 		"vitest": "^2.1.6"
 	},
 	"dependencies": {
 		"@braid/c_example": "workspace:*",
-		"@types/node": "^22.10.1"
+		"@types/node": "^22.10.1",
+		"node-fetch": "^3.3.2"
 	}
 }

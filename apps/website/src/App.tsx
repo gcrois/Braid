@@ -1,9 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { ChangeEvent } from "preact/compat";
-import { initCore } from "@braid/c_example";
-
-// const init = initCore();
-// let core: Awaited<typeof init>;
+import { initCore as initCoreC } from "@braid/c_example";
+import { initCoreWasm as initCoreRust } from "@braid/rust_example";
 
 export function App() {
 	const [nums, setNums] = useState({
@@ -22,14 +20,23 @@ export function App() {
 		};
 
 	const handleNChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setN(e.target?.value);
+		setN((e.target as HTMLInputElement).value);
 	};
 
 	useEffect(() => {
-		initCore().then((core) => {
+        console.log("Initializing C");
+		initCoreC().then((core) => {
+            console.log("C initialized");
 			console.log(core);
 			core._main(0, 0);
 		});
+
+        console.log("Initializing Rust");
+        initCoreRust().then((rust_core) =>{
+            console.log("Rust initialized");
+            console.log(rust_core);
+            rust_core.main();
+        });
 	});
 
 	return (
