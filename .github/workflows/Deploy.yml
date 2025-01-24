@@ -1,0 +1,55 @@
+name: Deploy
+
+permissions:
+    id-token: write
+    pages: write
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout your repository using git
+              uses: actions/checkout@v4
+              with:
+                  submodules: true
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "21"
+
+            - name: Setup emsdk
+              uses: mymindstorm/setup-emsdk@v14
+              with:
+                  version: 3.1.64
+                  actions-cache-folder: "emsdk-cache"
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@v3
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build project
+              run: pnpm run build
+
+            # Switch to upload-pages-artifact for GitHub Pages compatibility
+            - name: Upload production-ready build files for GitHub Pages
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: ./website/dist
+                  name: github-pages
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4

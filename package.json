@@ -1,0 +1,37 @@
+{
+	"name": "braid",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev:web": "turbo dev --filter=./apps/website",
+		"dev:native": "turbo dev --filter=./apps/native",
+		"build": "pnpm --filter=\"@braid/*\" build && pnpm --filter=\"braid-web\" build",
+		"style": "prettier --write .",
+		"test:all": "pnpm -r test"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"prettier": "^3.4.1",
+		"turbo": "^2.3.3",
+		"vitest": "^2.1.6"
+	},
+	"prettier": {
+		"semi": true,
+		"singleQuote": false,
+		"tabWidth": 4,
+		"useTabs": true
+	},
+	"packageManager": "pnpm@9.6.0",
+	"pnpm": {
+		"peerDependencyRules": {
+			"ignoreMissing": [
+				"@babel/*",
+				"expo-modules-*",
+				"typescript"
+			]
+		}
+	}
+}

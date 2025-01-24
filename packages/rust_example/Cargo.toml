@@ -1,0 +1,27 @@
+[package]
+name = "rust_example"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+console_error_panic_hook = "0.1"
+web-sys = { version = "0.3.72", features = [
+    "Blob",
+    "DedicatedWorkerGlobalScope",
+    "MessageEvent",
+    "Url",
+    "Worker",
+    "WorkerType",
+    "WorkerOptions",
+    "Window",
+    "Navigator",
+    "WorkerNavigator",
+    "console",
+    "BroadcastChannel",
+    "EventTarget"
+] }
+
+[lib]
+crate-type = ["cdylib"]

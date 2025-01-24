@@ -1,0 +1,3 @@
+[submodule "packages/libspatialindex/libspatialindex"]
+	path = packages/libspatialindex/libspatialindex
+	url = git@github.com:libspatialindex/libspatialindex.git

@@ -1,0 +1,42 @@
+{
+	"name": "@braid/c_example",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"exports": {
+		".": {
+			"import": "./src/index.ts"
+		},
+		"./wasm": {
+			"import": "./build/wasm/core.js",
+			"types": "./build/wasm/core.d.ts"
+		},
+		"./js": {
+			"import": "./build/js/core.mjs",
+			"types": "./build/js/core.d.mts"
+		},
+		"./native": {
+			"require": "./build/bin/core"
+		}
+	},
+	"type": "module",
+	"scripts": {
+		"test": "vitest run",
+		"build:wasm": "emcmake cmake -S . -B build/wasm -DBUILD_WASM=ON && cmake --build build/wasm",
+		"build:node": "emcmake cmake -S . -B build/js -DBUILD_JS=ON && cmake --build build/js",
+		"build:native": "cmake -S . -B build/bin && cmake --build build/bin",
+		"build": "npm run build:wasm && npm run build:js && npm run build:native",
+		"run:native": "build/bin/core",
+		"run:node": "tsx src/run.ts"
+	},
+	"devDependencies": {
+		"tsx": "^4.19.2",
+		"typescript": "^5.7.2",
+		"vitest": "^2.1.6"
+	},
+	"dependencies": {
+		"@types/emscripten": "^1.39.13",
+		"@types/node": "^22.10.1",
+		"clarify": "^2.2.0",
+		"trace": "^3.2.0"
+	}
+}
