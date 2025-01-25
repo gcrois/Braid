@@ -8,6 +8,7 @@ import { fib as fibTS } from "@braid/ts_example";
 import { add } from "@braid/utils";
 
 import "./App.scss";
+import { CollabText } from "./CollabText";
 
 // Types for the loaded WASM modules
 type CModule = Awaited<ReturnType<typeof initCoreC>>;
@@ -201,6 +202,10 @@ export function App() {
                 <pre style={{ marginTop: "1rem", background: "#222", padding: "1rem" }}>
                     {benchResults}
                 </pre>
+                <div className="container">
+            <h2>My Braid + Loro Example</h2>
+                <CollabText wsUrl="ws://localhost:3030/doc-sync" />
+            </div>
             </div>
         </div>
     );
