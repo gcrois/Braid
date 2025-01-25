@@ -1,7 +1,7 @@
 import { test, expect, beforeAll } from "vitest";
-import { initCoreJS } from "./index.js";
+import { initCoreNode } from "./index";
 
-const init = initCoreJS;
+const init = initCoreNode;
 let core: Awaited<ReturnType<typeof init>>;
 
 beforeAll(async () => {

@@ -23,7 +23,7 @@
 		"test": "vitest run",
 		"build:wasm": "wasm-pack build --target web --out-dir build/wasm --scope braid-wasm",
 		"build:node": "wasm-pack build --target nodejs --out-dir build/nodejs --scope braid-node",
-		"build:native": "cargo build --release -Z unstable-options --artifact-dir build/native",
+        "build:native": "cargo +nightly build --release -Z unstable-options --artifact-dir build/native",
 		"build": "npm run build:wasm && npm run build:node && npm run build:native",
 		"run:native": "build/native/rust_example",
 		"run:node": "tsx ./src/run.ts"
@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@braid/c_example": "workspace:*",
 		"@types/node": "^22.10.1",
-		"node-fetch": "^3.3.2"
+		"node-fetch": "^3.3.2",
+        "wasm-pack": "0.13.1"
 	}
 }

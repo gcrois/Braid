@@ -1,0 +1,17 @@
+{
+	"name": "@braid/types",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"exports": {
+		".": {
+			"import": "./src/index.ts"
+		}
+	},
+	"type": "module",
+	"scripts": {
+	},
+	"devDependencies": {
+	},
+	"dependencies": {
+	}
+}

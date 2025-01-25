@@ -13,7 +13,8 @@
 	},
 	"devDependencies": {
 		"@braid/c_example": "workspace:*",
-        "@braid/rust_example": "workspace:*",
+		"@braid/rust_example": "workspace:*",
+		"@braid/ts_example": "workspace:*",
 		"@braid/ui": "workspace:*",
 		"@braid/utils": "workspace:*",
 		"@preact/preset-vite": "^2.9.0",

@@ -1,11 +1,8 @@
-import initWasm from "@braid/rust_example/wasm";
-import * as coreJS from "@braid/rust_example/js";
-
-export function initCoreJS() {
-    return coreJS;
+export function initCoreNode() {
+    return import("@braid/rust_example/node");
 }
 
 export async function initCoreWasm() {
-    const core = await initWasm();
+    const core = (await import("@braid/rust_example/wasm")).default();
     return core;
 }
