@@ -1,6 +1,0 @@
-# dune init library component
-# OCAMLPARAM: unset
-# Shared cache: disabled
-# Shared cache location: /Users/gc/.cache/dune/db
-# Workspace root: /Users/gc/Projects/Braid/packages/ml_component
-# Auto-detected concurrency: 10
