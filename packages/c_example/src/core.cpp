@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 
 enum Platform { Native, Web, NodeJS };
 Platform platform = Native;

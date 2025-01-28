@@ -4,11 +4,13 @@ import { ChangeEvent } from "preact/compat";
 import { initCore as initCoreC } from "@braid/c_example";
 import { initCoreWasm as initCoreRust } from "@braid/rust_example";
 import { fib as fibTS } from "@braid/ts_example";
+import { initPyodide } from "@braid/py_example";
 
 import { add } from "@braid/utils";
 
 import "./App.scss";
 import { CollabText } from "./CollabText";
+import { WebGlDemo } from "./WebGlDemo";
 
 // Types for the loaded WASM modules
 type CModule = Awaited<ReturnType<typeof initCoreC>>;
@@ -18,12 +20,27 @@ export function App() {
     // 1) Modules
     const [cModule, setCModule] = useState<CModule | null>(null);
     const [rustModule, setRustModule] = useState<RustModule | null>(null);
+    const [pyodideLoaded, setPyodideLoaded] = useState<boolean>(false);
+
+    async function handleLoadPyodide() {
+        try {
+            const pyApi = await initPyodide();
+            setPyodideLoaded(true);
+
+            // For example, compute fib(10) from Python:
+            const val = pyApi.pyFib(10);
+            setPyFibVal(String(val));
+        } catch (err) {
+            console.error("Failed to load Pyodide", err);
+        }
+    }
 
     // 2) Inputs & results for fib
     const [fibInput, setFibInput] = useState("10");
     const [fibResultTS, setFibResultTS] = useState<number | null>(null);
     const [fibResultC, setFibResultC] = useState<number | null>(null);
     const [fibResultRust, setFibResultRust] = useState<number | null>(null);
+    const [pyFibVal, setPyFibVal] = useState<string>("(not computed)");
 
     // 3) Simple add fields
     const [nums, setNums] = useState({ a: "5", b: "3" });
@@ -128,6 +145,14 @@ export function App() {
                 <code>add()</code> from <code>@braid/utils</code>.
             </p>
 
+            <div className="card">
+                <h2>Pyodide (Python in the Browser)</h2>
+                <button onClick={handleLoadPyodide} disabled={pyodideLoaded}>
+                    {pyodideLoaded ? "Pyodide Loaded" : "Load Pyodide + fib(10)"}
+                </button>
+                <p>Python fib(10): {pyFibVal}</p>
+            </div>
+
             {/* Fib Card */}
             <div className="card">
                 <h2>Fibonacci from TS / C / Rust</h2>
@@ -203,9 +228,13 @@ export function App() {
                     {benchResults}
                 </pre>
                 <div className="container">
-            <h2>My Braid + Loro Example</h2>
+            <h2>Braid + Loro Example</h2>
                 <CollabText wsUrl="ws://localhost:3030/doc-sync" />
             </div>
+            </div>
+
+            <div className="card">
+                <WebGlDemo />
             </div>
         </div>
     );

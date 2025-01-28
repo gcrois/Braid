@@ -10,9 +10,17 @@
 			"import": "./build/wasm/core.js",
 			"types": "./build/wasm/core.d.ts"
 		},
+		"./wasm-opengl": {
+			"import": "./build/wasm/opengl_example.js",
+			"types": "./build/wasm/opengl_example.d.ts"
+		},
 		"./js": {
 			"import": "./build/js/core.mjs",
 			"types": "./build/js/core.d.mts"
+		},
+		"./js-opengl": {
+			"import": "./build/js/opengl_example.mjs",
+			"types": "./build/js/opengl_example.d.mts"
 		},
 		"./native": {
 			"require": "./build/bin/core"
@@ -21,9 +29,9 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest run",
-		"build:wasm": "emcmake cmake -S . -B build/wasm -DBUILD_WASM=ON && cmake --build build/wasm",
-		"build:node": "emcmake cmake -S . -B build/js -DBUILD_JS=ON && cmake --build build/js",
-		"build:native": "cmake -S . -B build/bin && cmake --build build/bin",
+		"build:wasm": "BUILT_TIME=$(date +%s) emcmake cmake -S . -B build/wasm -DBUILD_WASM=ON && cmake --build build/wasm",
+		"build:node": "BUILT_TIME=$(date +%s) emcmake cmake -S . -B build/js -DBUILD_JS=ON && cmake --build build/js",
+		"build:native": "BUILT_TIME=$(date +%s) cmake -S . -B build/bin && cmake --build build/bin",
 		"build": "npm run build:wasm && npm run build:node && npm run build:native",
 		"run:native": "build/bin/core",
 		"run:node": "tsx src/run.ts"

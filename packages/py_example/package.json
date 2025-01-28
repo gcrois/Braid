@@ -1,0 +1,22 @@
+{
+    "name": "@braid/py_example",
+    "version": "0.0.1",
+    "type": "module",
+    "main": "src/index.ts",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts"
+        }
+    },
+    "scripts": {
+        "build": "",
+        "buillld": "tsc --project tsconfig.json",
+        "test": "vitest run"
+    },
+    "devDependencies": {
+        "typescript": "^5.5.3",
+        "vitest": "3.0.4"
+    },
+    "dependencies": {
+    }
+}
