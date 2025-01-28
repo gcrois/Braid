@@ -1,8 +1,8 @@
 import { useState, useEffect } from "preact/hooks";
 import { ChangeEvent } from "preact/compat";
 
-import { initCore as initCoreC } from "@braid/c_example";
-import { initCoreWasm as initCoreRust } from "@braid/rust_example";
+import initCoreC from "@braid/c_example/wasm";
+import initCoreRust from "@braid/rust_example/wasm";
 import { fib as fibTS } from "@braid/ts_example";
 import { initPyodide } from "@braid/py_example";
 

@@ -41,8 +41,8 @@ jobs:
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
 
-            - name: Build project
-              run: pnpm run build
+            - name: Build project for web
+              run: pnpm run build:web
 
             # Switch to upload-pages-artifact for GitHub Pages compatibility
             - name: Upload production-ready build files for GitHub Pages

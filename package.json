@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"dev:web": "turbo dev --filter=./apps/website",
-		"build": "pnpm --filter=\"@braid/*\" build && pnpm --filter=\"braid-web\" build",
+        "build": "pnpm build:all",
+		"build:all": "pnpm --filter=\"@braid/*\" build && pnpm --filter=\"braid-web\" build",
+        "build:web": "pnpm --filter=\"@braid/*\" build:wasm && pnpm --filter=\"braid-web\" build",
 		"style": "prettier --write .",
 		"test:all": "pnpm -r test",
         "type": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./packages/types --ts_proto_opt=esModuleInterop=true,forceLong=long -I=. './packages/types'",
