@@ -1,45 +1,59 @@
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { initOpenGL } from "@braid/c_example";
 
 /**
  * WebGlDemo demonstrates the Mandelbrot fly-in from C++ (opengl_example.cpp),
  * compiled to WebAssembly via Emscripten.
+ * It now launches only after clicking a button.
  */
 export function WebGlDemo() {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [launched, setLaunched] = useState(false);
+	const [canvasNode, setCanvasNode] = useState<HTMLCanvasElement | null>(
+		null,
+	);
+	const [status, setStatus] = useState<string>("Nothing");
 
-    useEffect(() => {
-        let canceled = false;
+	// When "launched" is true and the canvas is available, load the OpenGL module.
+	useEffect(() => {
+		if (launched && canvasNode) {
+			initOpenGL()
+				.then((module) => {
+					module._main(0, 0);
+					setStatus("Launched OpenGL Demo");
+				})
+				.catch((err) => {
+					setStatus(
+						"Failed to load opengl_example WASM module: " + err,
+					);
+					console.error(
+						"Failed to load opengl_example WASM module:",
+						err,
+					);
+				});
+		}
+	}, [launched, canvasNode]);
 
-        (async () => {
-            try {
-                // 1) Load the Emscripten module for the OpenGL example
-                const module = await initOpenGL();
-
-                if (canceled) return;
-
-                module._main(0, 0);
-
-            } catch (err) {
-                console.error("Failed to load opengl_example WASM module:", err);
-            }
-        })();
-
-        return () => {
-            canceled = true;
-        };
-    }, []);
-
-    return (
-        <div style={{ textAlign: "center" }}>
-            <h2>WebGL Mandelbrot Demo (C++ via Emscripten)</h2>
-            <canvas
-                ref={canvasRef}
-                width={512}
-                height={512}
-                id="canvas"
-                style={{ border: "1px solid #444", width: "100%", aspectRatio: "1 / 1" }}
-            />
-        </div>
-    );
+	return (
+		<div style={{ textAlign: "center" }}>
+			<h2>WebGL Mandelbrot Demo (C++ via Emscripten)</h2>
+			<button onClick={() => setLaunched(true)}>
+				{launched ? "Launched" : "Launch OpenGL Demo"}
+			</button>
+			{launched && (
+				<canvas
+					ref={setCanvasNode}
+					width={512}
+					height={512}
+					id="canvas"
+					style={{
+						border: "1px solid #444",
+						width: "100%",
+						aspectRatio: "1 / 1",
+						marginTop: "1rem",
+					}}
+				/>
+			)}
+			<p>{status}</p>
+		</div>
+	);
 }

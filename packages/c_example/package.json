@@ -10,6 +10,9 @@
 			"import": "./build/wasm/core.js",
 			"types": "./build/wasm/core.d.ts"
 		},
+		"./wasm-worker": {
+			"import": "./src/spawn_worker.ts"
+		},
 		"./wasm-opengl": {
 			"import": "./build/wasm/opengl_example.js",
 			"types": "./build/wasm/opengl_example.d.ts"

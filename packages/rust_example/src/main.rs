@@ -40,6 +40,26 @@ pub fn fib(n: u32) -> u32 {
 }
 
 #[wasm_bindgen]
+pub fn is_prime(n: u32) -> bool {
+    if n <= 1 {
+        return false;
+    }
+
+    for i in 2..n {
+        if n % i == 0 {
+            return false;
+        }
+    }
+
+    true
+}
+
+#[wasm_bindgen]
+pub fn double_string(s: &str) -> String {
+    format!("{}{}", s, s)
+}
+
+#[wasm_bindgen]
 pub fn detect_platform() -> String {
     let global = js_sys::global();
 

@@ -1,18 +1,18 @@
 {
-    "name": "@braid/wc_example",
-    "version": "0.0.1",
-    "type": "module",
-    "scripts": {
-        "build": "vite build"
-    },
-    "dependencies": {
-        "preact": "^10.23.1",
-        "@braid/rust_example": "workspace:*",
-        "@braid/c_example": "workspace:*"
-    },
-    "devDependencies": {
-        "typescript": "^5.5.3",
-        "@preact/preset-vite": "^2.9.0",
-        "vite": "^5.4.1"
-    }
+	"name": "@braid/wc_example",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"build": "vite build"
+	},
+	"dependencies": {
+		"preact": "^10.23.1",
+		"@braid/rust_example": "workspace:*",
+		"@braid/c_example": "workspace:*"
+	},
+	"devDependencies": {
+		"typescript": "^5.5.3",
+		"@preact/preset-vite": "^2.9.0",
+		"vite": "^5.4.1"
+	}
 }

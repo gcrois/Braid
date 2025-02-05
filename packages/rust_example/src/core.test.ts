@@ -5,7 +5,7 @@ const init = initCoreNode;
 let core: Awaited<ReturnType<typeof init>>;
 
 beforeAll(async () => {
-    console.log(init);
+	console.log(init);
 	core = await init();
 });
 

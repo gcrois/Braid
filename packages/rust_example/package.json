@@ -14,6 +14,9 @@
 			"import": "./build/wasm/rust_example.js",
 			"types": "./build/wasm/rust_example.d.ts"
 		},
+		"./wasm-worker": {
+			"import": "./src/spawn_worker.ts"
+		},
 		"./native": {
 			"require": "./target/release/rust_example"
 		}
@@ -23,7 +26,7 @@
 		"test": "vitest run",
 		"build:wasm": "BUILT_TIME=$(date +%s) wasm-pack build --target web --out-dir build/wasm --scope braid-wasm",
 		"build:node": "BUILT_TIME=$(date +%s) wasm-pack build --target nodejs --out-dir build/nodejs --scope braid-node",
-        "build:native": "BUILT_TIME=$(date +%s) cargo +nightly build --release -Z unstable-options --artifact-dir build/native",
+		"build:native": "BUILT_TIME=$(date +%s) cargo +nightly build --release -Z unstable-options --artifact-dir build/native",
 		"build": "npm run build:wasm && npm run build:node && npm run build:native",
 		"run:native": "build/native/rust_example",
 		"run:node": "tsx ./src/run.ts"
@@ -34,9 +37,8 @@
 		"vitest": "^2.1.6"
 	},
 	"dependencies": {
-		"@braid/c_example": "workspace:*",
 		"@types/node": "^22.10.1",
 		"node-fetch": "^3.3.2",
-        "wasm-pack": "0.13.1"
+		"wasm-pack": "0.13.1"
 	}
 }

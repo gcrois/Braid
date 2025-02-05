@@ -1,32 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Fib Element Demo</title>
-</head>
-<body>
-    <h1>Testing &lt;fib-element&gt; from plain HTML</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Fib Element Demo</title>
+	</head>
+	<body>
+		<h1>Testing &lt;fib-element&gt; from plain HTML</h1>
 
-    <script type="module" src="./dist/my-wc.js"></script>
-    <fib-element id="fibElem" n="10"></fib-element>
+		<script type="module" src="./dist/my-wc.js"></script>
+		<fib-element id="fibElem" n="10"></fib-element>
 
-    <div style="margin-top:1rem;">
-        <button id="decBtn">Decrement n</button>
-        <button id="incBtn">Increment n</button>
-    </div>
+		<div style="margin-top: 1rem">
+			<button id="decBtn">Decrement n</button>
+			<button id="incBtn">Increment n</button>
+		</div>
 
-    <script>
-        const fibElem = document.getElementById("fibElem");
+		<script>
+			const fibElem = document.getElementById("fibElem");
 
-        document.getElementById("decBtn").addEventListener("click", () => {
-            const current = parseInt(fibElem.getAttribute("n"), 10) || 0;
-            fibElem.setAttribute("n", String(current - 1));
-        });
+			document.getElementById("decBtn").addEventListener("click", () => {
+				const current = parseInt(fibElem.getAttribute("n"), 10) || 0;
+				fibElem.setAttribute("n", String(current - 1));
+			});
 
-        document.getElementById("incBtn").addEventListener("click", () => {
-            const current = parseInt(fibElem.getAttribute("n"), 10) || 0;
-            fibElem.setAttribute("n", String(current + 1));
-        });
-    </script>
-</body>
+			document.getElementById("incBtn").addEventListener("click", () => {
+				const current = parseInt(fibElem.getAttribute("n"), 10) || 0;
+				fibElem.setAttribute("n", String(current + 1));
+			});
+		</script>
+	</body>
 </html>

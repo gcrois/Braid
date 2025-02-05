@@ -1,22 +1,39 @@
 {
-    "name": "@braid/py_example",
-    "version": "0.0.1",
-    "type": "module",
-    "main": "src/index.ts",
-    "exports": {
-        ".": {
-            "import": "./src/index.ts"
-        }
-    },
-    "scripts": {
-        "build": "",
-        "buillld": "tsc --project tsconfig.json",
-        "test": "vitest run"
-    },
-    "devDependencies": {
-        "typescript": "^5.5.3",
-        "vitest": "3.0.4"
-    },
-    "dependencies": {
-    }
+	"name": "@braid/py_example",
+	"version": "0.0.1",
+	"type": "module",
+	"module": "dist/index.js",
+	"main": "dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./worker": {
+			"import": "./dist/worker.js",
+			"default": "./dist/worker.js",
+			"types": "./dist/worker.d.ts"
+		}
+	},
+	"scripts": {
+        "build:web": "rollup -c",
+		"build": "rollup -c",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "28.0.2",
+		"@rollup/plugin-node-resolve": "16.0.0",
+		"@rollup/plugin-typescript": "12.1.2",
+		"rollup": "4.34.2",
+		"rollup-plugin-string-import": "^1.2.5",
+		"typescript": "^5.5.3",
+		"vitest": "3.0.4",
+		"pyodide": "^0.27.2"
+	},
+	"dependencies": {
+		"pyodide": "^0.27.2",
+		"rollup-plugin-copy": "^3.5.0",
+		"tslib": "^2.8.1"
+	}
 }
