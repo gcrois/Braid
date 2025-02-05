@@ -17,7 +17,7 @@
 		}
 	},
 	"scripts": {
-        "build:web": "rollup -c",
+        "build:wasm": "rollup -c",
 		"build": "rollup -c",
 		"test": "vitest run"
 	},
