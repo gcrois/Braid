@@ -37,4 +37,5 @@ export default {
 			],
 		}),
 	],
+    preserveSymlinks: true
 };

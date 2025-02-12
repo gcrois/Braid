@@ -7,6 +7,7 @@ export async function initPyCore() {
 	await pyodide.runPythonAsync(fibCode);
 	return {
 		fib: (n: number): number => pyodide.runPython(`fib(${n})`),
+        eval: (code: string): any => pyodide.runPython(code),
 	};
 }
 

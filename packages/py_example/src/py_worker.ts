@@ -1,22 +1,34 @@
 import { initPyCore } from "./py_core";
 
+type Core = Awaited<ReturnType<typeof initPyCore>>
+
+type WorkerRequest<T extends keyof Core = keyof Core> = {
+    id: number;
+    method: T;
+    args: Core[T] extends (...args: any[]) => any ? Parameters<Core[T]> : never;
+};
+
 (async () => {
 	const core = await initPyCore();
-	// Signal that the core is ready.
+	// Signal that the module is ready.
 	postMessage({ ready: true });
-
-	addEventListener("message", async (e: MessageEvent<any>) => {
-		const { id, method, args } = e.data;
+	addEventListener("message", async (e: any) => {
+		const { id, method, args } = e.data as WorkerRequest;
 		let result;
 		try {
-			// Call the specified method on core.
-			result = (core[method as keyof typeof core] as CallableFunction)(
-				...args,
-			);
+            // if the method is not a function, return the value of the property
+            if (typeof core[method] !== "function") {
+                result = core[method];
+            }
+            // if the method is a function, call it with the arguments
+            else {
+                // @ts-ignore-error: TS can't infer that args is a tuple here, but I do. I think...
+                result = await core[method](...(args));
+            }
 		} catch (error) {
 			result = error;
 		}
-		// Reply with the result.
+		// Reply with the original id to match the request.
 		postMessage({ id, result });
 	});
 })();
