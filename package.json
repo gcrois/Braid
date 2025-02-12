@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+        "preview:web": "pnpm --filter=\"braid-web\" preview",
 		"dev:web": "turbo dev --filter=./apps/website",
 		"build": "pnpm build:all",
 		"build:all": "pnpm --filter=\"@braid/*\" build && pnpm --filter=\"braid-web\" build",

@@ -11,7 +11,7 @@ export function CoreManager() {
 					<tr>
 						<th>Core Name</th>
 						<th>Status</th>
-						<th>Worker Mode</th>
+						<th>Worker</th>
 						<th>Details</th>
 						<th>Actions</th>
 					</tr>

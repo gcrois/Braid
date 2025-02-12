@@ -19,8 +19,18 @@ export class WorkerWrapper<T extends object> {
 	private _readyPromise: Promise<void>;
 	private _resolveReady!: () => void;
 
-	constructor(workerScriptUrl: string | URL) {
+	constructor(worker: { url: string | URL } | { raw: string}) {
+        console.log("WorkerWrapper constructor", worker);
+        let workerScriptUrl: string;
+        if ("url" in worker) {
+            workerScriptUrl = worker.url.toString();
+        } else {
+            console.log("Creating worker with raw script", worker.raw);
+            workerScriptUrl = URL.createObjectURL(new Blob([worker.raw], { type: "application/javascript" }));
+        }
+
 		// Pass in the URL to the worker script.
+        console.log("Creating worker with URL", workerScriptUrl);
 		this.worker = new Worker(workerScriptUrl, { type: "module" });
 		this._readyPromise = new Promise<void>((resolve) => {
 			this._resolveReady = resolve;
@@ -38,6 +48,9 @@ export class WorkerWrapper<T extends object> {
 				this.pending.delete(id);
 			}
 		};
+        this.worker.onerror = (e) => {
+            console.error("Worker error", e);
+        }
 	}
 
 	/**

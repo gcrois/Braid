@@ -1,6 +1,8 @@
-import { initPyCore, PyCore } from "./py_core";
-import { WorkerWrapper } from "./WorkerWrapper";
+import { initPyCore } from "./py_core";
+import { WorkerWrapper } from "@braid/utils";
 
 export function initCoreWorker() {
-    return new WorkerWrapper<Awaited<ReturnType<typeof initPyCore>>>(new URL("./py_worker.js", import.meta.url));
+    const url = new URL("./py_worker.es.js", import.meta.url);
+    console.log(url);
+    return new WorkerWrapper<Awaited<ReturnType<typeof initPyCore>>>({url});
 }

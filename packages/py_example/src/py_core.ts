@@ -1,5 +1,5 @@
 import { loadPyodide } from "pyodide";
-import fibCode from "./fib.py";
+import fibCode from "./fib.py?raw&inline";
 
 export async function initPyCore() {
 	const pyodide = await loadPyodide();

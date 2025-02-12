@@ -14,7 +14,7 @@ function convertToFibModule(core: CoreData): FibFunc {
 export function CoreExecFibCard() {
 	const { cores } = useCoreContext();
 	const [fibInput, setFibInput] = useState("10");
-	const [results, setResults] = useState<Record<string, { value: number; time: number }>>({});
+	const [results, setResults] = useState<Record<string, { value: string; time: number }>>({});
 
 	async function runFib(coreName: string, fibFunc: FibFunc) {
 		const n = parseInt(fibInput, 10);
@@ -23,7 +23,7 @@ export function CoreExecFibCard() {
 		const result = await fibFunc(n);
 		const time = performance.now() - start;
         console.log("result", result);
-		setResults((prev) => ({ ...prev, [coreName]: { value: result, time } }));
+		setResults((prev) => ({ ...prev, [coreName]: { value: `${result}`, time } }));
 	}
 
 	async function benchmarkFib(coreName: string, fibFunc: FibFunc) {
@@ -32,13 +32,14 @@ export function CoreExecFibCard() {
 		const iterations = 50;
 		let total = 0;
 		let lastResult: any;
+        
+        const start = performance.now();
 		for (let i = 0; i < iterations; i++) {
-			const start = performance.now();
 			lastResult = await fibFunc(n);
-			total += performance.now() - start;
 		}
-		const avg = total / iterations;
-		setResults((prev) => ({ ...prev, [coreName]: { value: lastResult, time: avg } }));
+        total += performance.now() - start;
+
+		setResults((prev) => ({ ...prev, [coreName]: { value: `${lastResult} (${iterations} times)`, time: total } }));
 	}
 
 	return (
