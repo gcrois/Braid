@@ -56,12 +56,6 @@ export function App() {
 					</div>
 				</div>
 
-				{/* Collaborative Text Card */}
-				<div className="card">
-					<h2>Braid + Loro Example</h2>
-					<CollabText wsUrl="ws://localhost:3030/doc-sync" />
-				</div>
-
 				{/* WebGL Demo Card */}
 				<div className="card">
 					<WebGlDemo />
