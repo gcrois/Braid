@@ -5,6 +5,7 @@ import topLevelAwait from "vite-plugin-top-level-await";
 import { viteStaticCopy as copy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+    base: "/Braid/",
 	plugins: [
 		preact(),
 		wasm(),
