@@ -2,10 +2,10 @@ import { defineConfig } from "vite";
 import preact from "@preact/preset-vite";
 import wasm from "vite-plugin-wasm";
 import topLevelAwait from "vite-plugin-top-level-await";
-import { viteStaticCopy as copy } from 'vite-plugin-static-copy';
+import { viteStaticCopy as copy } from "vite-plugin-static-copy";
 
 export default defineConfig({
-    base: "/Braid/",
+	base: "/Braid/",
 	plugins: [
 		preact(),
 		wasm(),
@@ -13,9 +13,17 @@ export default defineConfig({
 		copy({
 			targets: [
 				{
-					src: "node_modules/@braid/py_example/dist/py_worker.es.js",
-					dest: ".",
-				}
+					src: "node_modules/@braid/py_example/dist/py_worker.*",
+					dest: "assets",
+				},
+				{
+					src: "../../node_modules/pyodide/pyodide*",
+					dest: "assets",
+				},
+				{
+					src: "../../node_modules/pyodide/python_stdlib.zip",
+					dest: "assets",
+				},
 			],
 		}),
 	],
@@ -24,6 +32,6 @@ export default defineConfig({
 	},
 	build: {
 		sourcemap: true,
-        assetsInlineLimit: 0,
+		assetsInlineLimit: 0,
 	},
 });

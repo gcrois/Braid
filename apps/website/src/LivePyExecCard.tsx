@@ -5,8 +5,10 @@ import { initCoreWorker } from "@braid/py_example";
 export function LivePyExecCard() {
 	const { cores } = useCoreContext();
 	// Find Pyodide Core
-	const pyCore = cores.find((core) => core.name === "Pyodide Core") as { module: Awaited<ReturnType<typeof initCoreWorker>> } | undefined;
-	const [code, setCode] = useState("print('Hello from Python')");
+	const pyCore = cores.find((core) => core.name === "Pyodide Core") as
+		| { module: ReturnType<typeof initCoreWorker> }
+		| undefined;
+	const [code, setCode] = useState(`"hello world" + "!" * 2 ** 3`);
 	const [output, setOutput] = useState<string>("");
 
 	async function runPython() {
@@ -15,7 +17,6 @@ export function LivePyExecCard() {
 			return;
 		}
 		try {
-            console.log("Calling eval", pyCore);
 			const result = await pyCore.module.call("eval", code);
 			setOutput(String(result));
 		} catch (err) {

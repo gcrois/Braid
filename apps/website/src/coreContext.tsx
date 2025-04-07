@@ -3,7 +3,7 @@ import { useContext, useState, ReactNode } from "preact/compat";
 
 import type { initCoreWorker as CreateCCoreWorker } from "@braid/c_example/wasm-worker";
 import type { initCoreWorker as CreateRustCoreWorker } from "@braid/rust_example/wasm-worker";
-import type { initCoreWorker as CreatePythonCoreWorker} from "@braid/py_example";
+import type { initCoreWorker as CreatePythonCoreWorker } from "@braid/py_example";
 
 export type CCoreWorker = ReturnType<typeof CreateCCoreWorker>;
 export type RustCoreWorker = ReturnType<typeof CreateRustCoreWorker>;
@@ -40,15 +40,15 @@ export function CoreProvider({ children }: { children: ReactNode }) {
 	const [cInWorker, setCInWorker] = useState<boolean>(true);
 
 	async function loadCCore(): Promise<void> {
-        if (cModule) cModule.terminate();
+		if (cModule) cModule.terminate();
 
-        console.log("Loading C Core");
-        const { initCoreWorker } = await import("@braid/c_example/wasm-worker");
-        const core = initCoreWorker();
-        await core.ready();
-        console.log("C Core loaded");
+		console.log("Loading C Core");
+		const { initCoreWorker } = await import("@braid/c_example/wasm-worker");
+		const core = initCoreWorker();
+		await core.ready();
+		console.log("C Core loaded");
 
-        setCModule(core);
+		setCModule(core);
 	}
 	function unloadCCore(): void {
 		if (cModule) cModule.terminate();
@@ -60,15 +60,17 @@ export function CoreProvider({ children }: { children: ReactNode }) {
 	const [rustInWorker, setRustInWorker] = useState<boolean>(true);
 
 	async function loadRustCore(): Promise<void> {
-        if (rustModule) rustModule.terminate();
+		if (rustModule) rustModule.terminate();
 
-        console.log("Loading Rust Core");
-        const { initCoreWorker } = await import("@braid/rust_example/wasm-worker");
-        const core = initCoreWorker();
-        await core.ready();
-        console.log("Rust Core loaded");
+		console.log("Loading Rust Core");
+		const { initCoreWorker } = await import(
+			"@braid/rust_example/wasm-worker"
+		);
+		const core = initCoreWorker();
+		await core.ready();
+		console.log("Rust Core loaded");
 
-        setRustModule(core);
+		setRustModule(core);
 	}
 	function unloadRustCore(): void {
 		if (rustModule) rustModule.terminate();
@@ -80,18 +82,15 @@ export function CoreProvider({ children }: { children: ReactNode }) {
 	const [pyInWorker, setPyInWorker] = useState<boolean>(true);
 
 	async function loadPyCore(): Promise<void> {
-        if (pyModule) pyModule.terminate();
+		if (pyModule) pyModule.terminate();
 
-        // const workerCode = await import("@braid/py_example/worker");
-        // console.log(workerCode);
+		console.log("Loading Pyodide Core");
+		const { initCoreWorker } = await import("@braid/py_example");
+		const core = initCoreWorker();
+		await core.ready();
+		console.log("Pyodide Core loaded");
 
-        console.log("Loading Pyodide Core");
-        const { initCoreWorker } = await import("@braid/py_example");
-        const core = initCoreWorker();
-        await core.ready();
-        console.log("Pyodide Core loaded");
-        
-        setPyModule(core);
+		setPyModule(core);
 	}
 	function unloadPyCore(): void {
 		if (pyModule) pyModule.terminate();
@@ -125,5 +124,9 @@ export function CoreProvider({ children }: { children: ReactNode }) {
 		},
 	];
 
-	return <CoreContext.Provider value={{ cores }}>{children}</CoreContext.Provider>;
+	return (
+		<CoreContext.Provider value={{ cores }}>
+			{children}
+		</CoreContext.Provider>
+	);
 }

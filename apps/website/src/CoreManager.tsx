@@ -27,18 +27,33 @@ export function CoreManager() {
 									<input
 										type="checkbox"
 										checked={core.loadInWorker}
-										onChange={(e) => core.setLoadInWorker(e.currentTarget.checked)}
+										onChange={(e) =>
+											core.setLoadInWorker(
+												e.currentTarget.checked,
+											)
+										}
 									/>
 								</td>
 								<td>
 									{core.module ? (
 										<>
 											<pre className="core-details">
-												{JSON.stringify(Object.keys(core.module), null, 2)}
+												{JSON.stringify(
+													Object.keys(core.module),
+													null,
+													2,
+												)}
 											</pre>
 											<div className="core-extra-info">
-												<strong>Source Files:</strong> {info.sourceFiles.join(", ")} <br />
-												<strong>Available Methods:</strong> {info.availableMethods.join(", ")}
+												<strong>Source Files:</strong>{" "}
+												{info.sourceFiles.join(", ")}{" "}
+												<br />
+												<strong>
+													Available Methods:
+												</strong>{" "}
+												{info.availableMethods.join(
+													", ",
+												)}
 											</div>
 										</>
 									) : (
@@ -47,11 +62,17 @@ export function CoreManager() {
 								</td>
 								<td>
 									{core.module ? (
-										<button className="btn unload" onClick={core.unload}>
+										<button
+											className="btn unload"
+											onClick={core.unload}
+										>
 											Unload
 										</button>
 									) : (
-										<button className="btn load" onClick={core.load}>
+										<button
+											className="btn load"
+											onClick={core.load}
+										>
 											Load
 										</button>
 									)}

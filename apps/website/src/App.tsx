@@ -5,7 +5,7 @@ import { LivePyExecCard } from "./LivePyExecCard";
 import { useState } from "preact/hooks";
 import { fib as fibTS } from "@braid/ts_example";
 import { WebGlDemo } from "./WebGlDemo";
-import { CollabText } from "./CollabText";
+
 import "./App.scss";
 
 export function App() {
@@ -21,10 +21,7 @@ export function App() {
 	return (
 		<CoreProvider>
 			<div className="container">
-				<h1>Braid WASM &amp; Pyodide Demo</h1>
-				<p>
-					Compare <strong>TypeScript fib</strong> to various cores.
-				</p>
+				<h1>Braid WASM</h1>
 
 				{/* Core Manager with extra info */}
 				<CoreManager />

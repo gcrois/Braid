@@ -37,7 +37,7 @@
 		"vitest": "3.0.8"
 	},
 	"dependencies": {
-        "@braid/utils": "workspace:*",
+		"@braid/utils": "workspace:*",
 		"@types/node": "^22.10.1",
 		"node-fetch": "^3.3.2",
 		"wasm-pack": "0.13.1"

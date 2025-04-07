@@ -23,7 +23,8 @@
 		"rollup-plugin-copy": "^3.5.0",
 		"sass": "^1.79.3",
 		"typescript": "^5.5.3",
-		"vite": "^5.4.1",
+		"vite": "6.2.5",
+		"vite-plugin-static-copy": "^2.3.0",
 		"vite-plugin-top-level-await": "^1.4.4",
 		"vite-plugin-wasm": "^3.4.1"
 	}

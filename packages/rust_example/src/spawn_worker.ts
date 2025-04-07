@@ -4,5 +4,7 @@ import { WorkerWrapper } from "@braid/utils";
 import WorkerURL from "./worker?worker&url";
 
 export function initCoreWorker() {
-    return new WorkerWrapper<Awaited<ReturnType<typeof initCore>>>({url: WorkerURL});
+	return new WorkerWrapper<Awaited<ReturnType<typeof initCore>>>({
+		url: WorkerURL,
+	});
 }
