@@ -4,26 +4,30 @@ export function CoreManager() {
 	const { cores } = useCoreContext();
 
 	return (
-		<div className="core-manager card">
-			<h2>Core Manager</h2>
-			<table className="core-table">
+		<div className="bg-[var(--color-base02)] rounded-lg p-4 mb-4 shadow-md border border-[var(--color-base01)] border-opacity-30">
+			<h2 className="mb-4 text-[var(--typography-headings)]">Core Manager</h2>
+			<table className="w-full border-collapse">
 				<thead>
-					<tr>
-						<th>Core Name</th>
-						<th>Status</th>
-						<th>Worker</th>
-						<th>Details</th>
-						<th>Actions</th>
+					<tr className="border-b border-[var(--color-base01)] border-opacity-30">
+						<th className="py-2 px-4 text-left font-semibold text-[var(--typography-headings)]">Core Name</th>
+						<th className="py-2 px-4 text-left font-semibold text-[var(--typography-headings)]">Status</th>
+						<th className="py-2 px-4 text-left font-semibold text-[var(--typography-headings)]">Worker</th>
+						<th className="py-2 px-4 text-left font-semibold text-[var(--typography-headings)]">Details</th>
+						<th className="py-2 px-4 text-left font-semibold text-[var(--typography-headings)]">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{cores.map((core) => {
 						const info = { sourceFiles: [], availableMethods: [] };
 						return (
-							<tr key={core.name}>
-								<td>{core.name}</td>
-								<td>{core.module ? "Loaded" : "Not Loaded"}</td>
-								<td>
+							<tr key={core.name} className="border-b border-[var(--color-base01)] border-opacity-10">
+								<td className="py-2 px-4">{core.name}</td>
+								<td className="py-2 px-4">
+									<span className={core.module ? "text-[var(--color-green)]" : "text-[var(--color-base00)]"}>
+										{core.module ? "Loaded" : "Not Loaded"}
+									</span>
+								</td>
+								<td className="py-2 px-4">
 									<input
 										type="checkbox"
 										checked={core.loadInWorker}
@@ -32,45 +36,44 @@ export function CoreManager() {
 												e.currentTarget.checked,
 											)
 										}
+										className="w-4 h-4 accent-[var(--color-blue)]"
 									/>
 								</td>
-								<td>
+								<td className="py-2 px-4">
 									{core.module ? (
 										<>
-											<pre className="core-details">
+											<pre className="bg-[var(--color-base01)] bg-opacity-10 p-2 rounded text-xs overflow-auto max-h-24">
 												{JSON.stringify(
 													Object.keys(core.module),
 													null,
 													2,
 												)}
 											</pre>
-											<div className="core-extra-info">
-												<strong>Source Files:</strong>{" "}
-												{info.sourceFiles.join(", ")}{" "}
+											<div className="mt-2 text-sm">
+												<strong className="text-[var(--typography-headings)]">Source Files:</strong>{" "}
+												{info.sourceFiles.join(", ") || "None"}{" "}
 												<br />
-												<strong>
+												<strong className="text-[var(--typography-headings)]">
 													Available Methods:
 												</strong>{" "}
-												{info.availableMethods.join(
-													", ",
-												)}
+												{info.availableMethods.join(", ") || "None"}
 											</div>
 										</>
 									) : (
 										"—"
 									)}
 								</td>
-								<td>
+								<td className="py-2 px-4">
 									{core.module ? (
 										<button
-											className="btn unload"
+											className="cursor-pointer bg-[var(--color-red)] text-[var(--color-base3)] border-none rounded py-1 px-3 transition-colors duration-300 hover:bg-[var(--typography-links-hover)]"
 											onClick={core.unload}
 										>
 											Unload
 										</button>
 									) : (
 										<button
-											className="btn load"
+											className="cursor-pointer bg-[var(--color-blue)] text-[var(--color-base3)] border-none rounded py-1 px-3 transition-colors duration-300 hover:bg-[var(--typography-links)]"
 											onClick={core.load}
 										>
 											Load

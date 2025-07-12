@@ -1,5 +1,4 @@
-import { createContext, h } from "preact";
-import { useContext, useState, ReactNode } from "preact/compat";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 import type { initCoreWorker as CreateCCoreWorker } from "@braid/c_example/wasm-worker";
 import type { initCoreWorker as CreateRustCoreWorker } from "@braid/rust_example/wasm-worker";

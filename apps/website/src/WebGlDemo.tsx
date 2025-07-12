@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 import { initOpenGL } from "@braid/c_example";
 
 /**
@@ -34,9 +34,12 @@ export function WebGlDemo() {
 	}, [launched, canvasNode]);
 
 	return (
-		<div style={{ textAlign: "center" }}>
-			<h2>WebGL Mandelbrot Demo (C++ via Emscripten)</h2>
-			<button onClick={() => setLaunched(true)}>
+		<div className="text-center">
+			<h2 className="mb-2 text-[var(--typography-headings)]">WebGL Mandelbrot Demo (C++ via Emscripten)</h2>
+			<button 
+				onClick={() => setLaunched(true)}
+				className="cursor-pointer bg-[var(--color-green)] text-[var(--color-base3)] border-none rounded py-1 px-3 transition-colors duration-300 hover:bg-[var(--color-blue)]"
+			>
 				{launched ? "Launched" : "Launch OpenGL Demo"}
 			</button>
 			{launched && (
@@ -45,15 +48,10 @@ export function WebGlDemo() {
 					width={512}
 					height={512}
 					id="canvas"
-					style={{
-						border: "1px solid #444",
-						width: "100%",
-						aspectRatio: "1 / 1",
-						marginTop: "1rem",
-					}}
+					className="border border-[var(--color-base01)] w-full aspect-square mt-4"
 				/>
 			)}
-			<p>{status}</p>
+			<p className="mt-2 text-[var(--typography-body)]">{status}</p>
 		</div>
 	);
 }

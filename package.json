@@ -6,6 +6,7 @@
 	"scripts": {
 		"preview:web": "pnpm --filter=\"braid-web\" preview",
 		"dev:web": "turbo dev --filter=./apps/website",
+        "dev": "pnpm dev:web",
 		"build": "pnpm build:all",
 		"build:all": "pnpm --filter=\"@braid/*\" build && pnpm --filter=\"braid-web\" build",
 		"build:web": "pnpm --filter=\"@braid/*\" build:wasm && pnpm --filter=\"braid-web\" build",

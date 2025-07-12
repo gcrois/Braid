@@ -1,13 +1,15 @@
 import { defineConfig } from "vite";
-import preact from "@preact/preset-vite";
+import react from "@vitejs/plugin-react";
 import wasm from "vite-plugin-wasm";
 import topLevelAwait from "vite-plugin-top-level-await";
+import tailwindcss from "@tailwindcss/vite";
 import { viteStaticCopy as copy } from "vite-plugin-static-copy";
 
 export default defineConfig({
 	base: "/Braid/",
 	plugins: [
-		preact(),
+		react(),
+        tailwindcss(),
 		wasm(),
 		topLevelAwait(),
 		copy({
